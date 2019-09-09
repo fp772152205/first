@@ -1,0 +1,72 @@
+<!--index.wxml-->
+<view>
+  <view style='width:100%; text-align:center; margin-top:20rpx;'>
+    <text style='color:#09bb07; font-size:30rpx;'>我的健步数</text>
+  </view>
+  <view style='width:{{canvasWidth}}; height:{{canvasHeight}}px; margin-top:50rpx; padding-left:10px; padding-right:10px;'>
+    <canvas style="width:100%; height:100%; background-color:transparent;" canvas-id="columnChart" class="canvas"></canvas>
+  </view>
+</view>
+<view class="userinfo" wx:if="{{showGetUserInfo}}" style='margin-top:50rpx;'>
+  <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" style="width:400rpx;">微信授权登录</button>
+  <view style='width:100%; height:400rpx; text-align:center; line-height:80rpx; font-size:30rpx; color:#09bb07; margin-top:0rpx;'>
+    <text>需要微信授权后才能取得运动数据!</text>
+  </view>
+</view>
+
+<!-- 新增数据 -->
+<view class='step-match' style="">{{Title}}</view>
+  <ul class='step'>
+  <li>
+    <view class='step-one'>今日步数(步)</view>
+    <view class='step-two'><b>{{ToDayCount}}</b></view>
+  </li>
+  <li>
+    <view class='step-one'>今日里程(公里)</view>
+    <view class='step-two'>{{ToDayMiles}}</view>
+  </li>
+<!-- <li><br><</li> -->
+  <li>
+    <view class='step-one'>活动步数(步)</view>
+    <view class='step-two'>{{SumCount}}</view>
+  </li>
+  <li>
+    <view class='step-one'>活动里程(公里)</view>
+    <view class='step-two'>{{SumMiles}}</view>
+  </li>
+  </ul>
+<!-- 新增数据 -->
+<view class="container" wx:if="{{showBind}}" style='padding:30rpx;'>
+  <view>
+    <view style='color:gray; font-size:30rpx;'>
+      <text>手机号码</text>
+    </view>
+    <view style='margin-top:10rpx; color:gray; font-size:30rpx;'>
+      <input style='border:solid 1rpx #ccc;float:left; width:400rpx; height:70rpx; line-height:70rpx;' type='number' bindinput='mobileInputEvent'></input>
+      <button style='float:left; font-size:30rpx; color:green; height:74rpx; width:220rpx;' bindtap='getVerifyCode'>{{verifyCodeText}}</button>
+    </view>
+    <view style='color:gray; font-size:30rpx;'>
+      <text>验证码</text>
+    </view>
+    <view style='margin-top:10rpx; color:gray; font-size:30rpx;'>
+      <input style='border:solid 1rpx #ccc;float:left; width:400rpx; height:70rpx; line-height:70rpx;' type='number' bindinput='varifyInputEvent'></input>
+    </view>
+    <view style="width:100%;">
+      <button type='primary' style='margin-top:100rpx; width:80%;' bindtap='bindWeId'>绑定到工会账号</button>
+    </view>
+  </view>
+</view>
+<view class="container" wx:if="{{showUpload}}" style='padding:30rpx; width:100%;'>
+  <view style="width:100%; margin-top:30rpx">
+    <button type='primary' style='width:80%;' bindtap='uploadWeRunData'>同步健步记录</button>
+  </view>
+  <view style='color:gray; font-size:30rpx; width:100%; text-align:center; color:gray; margin-top:30rpx'>
+    <text>绑定号码：{{mobilePhone}}</text>
+  </view>
+  <view style='color:gray; font-size:30rpx; width:100%; text-align:center; color:gray; margin-top:30rpx'>
+    <text>最近上传时间：{{lastUploadTime}}</text>
+  </view>
+  <!--<view style='color:gray; font-size:30rpx; width:100%; text-align:center; color:gray; margin-top:30rpx'>
+    <text>今天排名：第 {{orderStepCount}} 位</text>
+  </view>-->
+</view>
